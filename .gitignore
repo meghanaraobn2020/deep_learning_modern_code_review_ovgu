@@ -1,0 +1,10 @@
+#Ignore the following folders
+**/dataset/**
+**/models/**
+**/results/**
+**/automating_code_review/**
+
+# Ignore the following in genertate predictions
+**/CodeXGLUE/**
+**/dumps/**
+
