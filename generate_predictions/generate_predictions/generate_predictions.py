@@ -13,20 +13,20 @@ class EvalDataset(torch.utils.data.Dataset):
 
         self.samples = []
 
-        df = pd.read_csv(data_dir_path + 'text.tsv', sep='\t', names=['source', 'target'])
+        df = pd.read_csv(data_dir_path + 'test.tsv', sep='\t', names=['source', 'target'])
         source = df['source']
         target = df['target']
 
-        f_source = open('test.source', 'w+')
-        f_target = open('test.target', 'w+')
+        f_source = open('test.source', 'w+', encoding='utf-8')
+        f_target = open('test.target', 'w+', encoding='utf-8')
         for j in range(len(df)):
             f_source.write(task + source[j] + '\n')
-            f_target.write(target[j])
+            f_target.write(target[j] + '\n')
         f_source.close()
         f_target.close()
 
-        input_file = open('test.source', 'r')
-        output_file = open('test.target', 'r')
+        input_file = open('test.source', 'r', encoding='utf-8')
+        output_file = open('test.target', 'r', encoding='utf-8')
 
         lines_input = input_file.readlines()
         output_lines = output_file.readlines()
@@ -42,13 +42,13 @@ class EvalDataset(torch.utils.data.Dataset):
         return len(self.samples)
 
 
-beam_size = 1
+beam_size = 2
 batch_size = 64
 task = 'code2code: '  # possible options: 'code2code: ', 'code&comment2code: ', 'code2comment: '
-data_dir = "../../dataset/fine-tuning/large/code-to-code/"  # change the path if needed
-tokenizer_name = "../../tokenizer/TokenizerModel.model"
-model_name_or_path = "./dumps/pytorch_model.bin"
-config_name = "./config.json"
+data_dir = "data/dataset/dataset/fine-tuning/new_large/code-to-code/"  # change the path if needed- ../../dataset/fine-tuning/large/code-to-code/"
+tokenizer_name = "deep_learning_modern_code_review_ovgu/tokenizer/tokenizer/TokenizerModel.model" #"../../tokenizer/TokenizerModel.model" 
+model_name_or_path ="deep_learning_modern_code_review_ovgu/dumps/pytorch_model.bin" #"./dumps/pytorch_model.bin" 
+config_name = "deep_learning_modern_code_review_ovgu/generate_predictions/generate_predictions/config.json" #"./config.json" 
 
 dataset = EvalDataset(data_dir, task)
 dloader = DataLoader(dataset=dataset, batch_size=batch_size, num_workers=0)
@@ -82,6 +82,8 @@ for batch in tqdm(dloader):
         attention_mask=attention_mask,
         early_stopping=True,
         num_return_sequences=beam_size).to(DEVICE)
+    
+    print(outputs)
 
     predictions.extend(t5_tokenizer.batch_decode(outputs, skip_special_tokens=True))
 
@@ -98,5 +100,6 @@ for batch in tqdm(dloader):
 
     old = new
     new = new + (batch_size * beam_size)
+    break
 
 f_pred.close()
