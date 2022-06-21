@@ -14,14 +14,14 @@ from t5.seqio import Feature,SentencePieceVocabulary
 from mesh_tensorflow.transformer.learning_rate_schedules import learning_rate_schedule_noam
 import gin
 
-masked_pretraining_dataset_path = "/content/drive/MyDrive/DLMCR/code_review_automation-main/automating_code_review/dataset/pre-training/pre-training.tsv"
+masked_pretraining_dataset_path = "data/automating_code_review/automating_code_review/dataset/pre-training/pre-training.tsv"
 
 nq_tsv_path = {
     "train": masked_pretraining_dataset_path
 }
 
-vocab_model_path = "/content/drive/MyDrive/DLMCR/code_review_automation-main/automating_code_review/tokenizer/TokenizerModel.model"
-vocab_path = "/content/drive/MyDrive/DLMCR/code_review_automation-main/automating_code_review/tokenizer/TokenizerModel.vocab"
+vocab_model_path = "data/automating_code_review/automating_code_review/tokenizer/TokenizerModel.model"
+vocab_path = "data/automating_code_review/automating_code_review/tokenizer/TokenizerModel.vocab"
 
 TaskRegistry = t5.data.TaskRegistry
 TfdsTask = t5.data.TfdsTask
@@ -82,7 +82,7 @@ for ex in tfds.as_numpy(ds.take(1)):
 
 MODEL_SIZE = "small"  
 
-MODEL_DIR = "/content/drive/MyDrive/DLMCR/code_review_automation-main/automating_code_review/model_dumps/pre-training/"
+MODEL_DIR = "data/automating_code_review/automating_code_review/model_dumps/pre-training/"
 
 model_parallelism, train_batch_size, keep_checkpoint_max = {
     "small": (1, 256, 16),
@@ -106,7 +106,7 @@ model = t5.models.MtfModel(
 )
 
 # We used 200000 TRAIN_STEPS
-PATH_GIN_FILE = "/content/drive/MyDrive/DLMCR/code_review_automation-main/automating_code_review/model_dumps/pre-training/operative_config.gin"
+PATH_GIN_FILE = "data/automating_code_review/automating_code_review/model_dumps/pre-training/operative_config.gin"
 
 with gin.unlock_config():    
     gin.parse_config_file(PATH_GIN_FILE)
