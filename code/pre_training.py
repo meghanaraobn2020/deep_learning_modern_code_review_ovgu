@@ -20,6 +20,10 @@ nq_tsv_path = {
     "train": masked_pretraining_dataset_path
 }
 
+gpu_devices = tf.config.experimental.list_physical_devices('GPU')
+for device in gpu_devices:
+    tf.config.experimental.set_memory_growth(device, True)
+
 vocab_model_path = "data/automating_code_review/automating_code_review/tokenizer/TokenizerModel.model"
 vocab_path = "data/automating_code_review/automating_code_review/tokenizer/TokenizerModel.vocab"
 
