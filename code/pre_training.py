@@ -13,16 +13,12 @@ from t5.data import postprocessors as t5_postprocessors
 from t5.seqio import Feature,SentencePieceVocabulary
 from mesh_tensorflow.transformer.learning_rate_schedules import learning_rate_schedule_noam
 import gin
-
 masked_pretraining_dataset_path = "data/automating_code_review/automating_code_review/dataset/pre-training/pre-training.tsv"
+
 
 nq_tsv_path = {
     "train": masked_pretraining_dataset_path
 }
-
-gpu_devices = tf.config.experimental.list_physical_devices('GPU')
-for device in gpu_devices:
-    tf.config.experimental.set_memory_growth(device, True)
 
 vocab_model_path = "data/automating_code_review/automating_code_review/tokenizer/TokenizerModel.model"
 vocab_path = "data/automating_code_review/automating_code_review/tokenizer/TokenizerModel.vocab"
@@ -106,7 +102,7 @@ model = t5.models.MtfModel(
     sequence_length={"inputs": 512, "targets": 512},
     learning_rate_schedule = learning_rate_schedule_noam,
     save_checkpoints_steps=10000,
-    keep_checkpoint_max=None
+    keep_checkpoint_max=keep_checkpoint_max
 )
 
 # We used 200000 TRAIN_STEPS
