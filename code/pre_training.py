@@ -13,6 +13,7 @@ from t5.data import postprocessors as t5_postprocessors
 from t5.seqio import Feature,SentencePieceVocabulary
 from mesh_tensorflow.transformer.learning_rate_schedules import learning_rate_schedule_noam
 import gin
+
 masked_pretraining_dataset_path = "data/automating_code_review/automating_code_review/dataset/pre-training/pre-training.tsv"
 
 
@@ -27,16 +28,8 @@ TaskRegistry = t5.data.TaskRegistry
 TfdsTask = t5.data.TfdsTask
 
 def get_default_vocabulary():
+  print('----------finsihed get_default_vocabulary-----------')
   return SentencePieceVocabulary(vocab_model_path, 100)
-
-
-DEFAULT_OUTPUT_FEATURES = {
-    "inputs": Feature(
-        vocabulary=get_default_vocabulary(), add_eos=False, required=True),
-
-    "targets": Feature(
-        vocabulary=get_default_vocabulary(), add_eos=False)
-}
 
 def nq_dataset_fn(split, shuffle_files=True):
   # We only have one file for each split.
@@ -49,20 +42,34 @@ def nq_dataset_fn(split, shuffle_files=True):
                         field_delim="\t", use_quote_delim=False),
       num_parallel_calls=tf.data.experimental.AUTOTUNE)
   ds = ds.map(lambda *ex: dict(zip(["input", "output"], ex)))
+  print('----------finsihed nq_dataset_fn-----------')
   return ds
-
-# print("A few raw train examples...")
-for ex in tfds.as_numpy(nq_dataset_fn("train").take(3)):
-  print(ex)
 
 def preprocessing(ds):
   def to_inputs_and_targets(ex):
         inputs = tf.strings.join([ ex['input']], separator=' ')
         class_label = tf.strings.join([ex['output']], separator=' ')
         return {'inputs': inputs, 'targets': class_label }
+        print('----------finsihed preprocessing-----------')
   return ds.map(to_inputs_and_targets, num_parallel_calls=tf.data.experimental.AUTOTUNE)
 
+
+DEFAULT_OUTPUT_FEATURES = {
+    "inputs": Feature(
+        vocabulary=get_default_vocabulary(), add_eos=False, required=True),
+
+    "targets": Feature(
+        vocabulary=get_default_vocabulary(), add_eos=False)
+}
+
+
+print("A few raw train examples...")
+for ex in tfds.as_numpy(nq_dataset_fn("train").take(3)):
+  print(ex)
+
+
 #Create a new training task
+print("Task registry add-------------------")
 t5.data.TaskRegistry.remove('pretraining')
 t5.data.TaskRegistry.add(
     "pretraining",
@@ -77,6 +84,7 @@ t5.data.TaskRegistry.add(
 nq_task = t5.data.TaskRegistry.get("pretraining")
 ds = nq_task.get_dataset(split="train", sequence_length={"inputs": 512, "targets": 512})
 print("A  preprocessed training example...")
+
 for ex in tfds.as_numpy(ds.take(1)):
   print(ex)
 
@@ -93,6 +101,7 @@ model_parallelism, train_batch_size, keep_checkpoint_max = {
 
 tf.io.gfile.makedirs(MODEL_DIR)
 
+print('--------model initialization--------------')
 model = t5.models.MtfModel(
     model_dir=MODEL_DIR,
     tpu=None,
@@ -108,7 +117,9 @@ model = t5.models.MtfModel(
 # We used 200000 TRAIN_STEPS
 PATH_GIN_FILE = "data/automating_code_review/automating_code_review/model_dumps/pre-training/operative_config.gin"
 
-with gin.unlock_config():    
+with gin.unlock_config():  
+    print('-----------train begins----------------')  
     gin.parse_config_file(PATH_GIN_FILE)
     TRAIN_STEPS = 200000
     model.train("pretraining", steps=TRAIN_STEPS)
+    print('-----------train ends----------------')  
