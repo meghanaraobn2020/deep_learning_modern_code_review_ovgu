@@ -50,8 +50,8 @@ def preprocessing(ds):
   def to_inputs_and_targets(ex):
         inputs = tf.strings.join([ ex['input']], separator=' ')
         class_label = tf.strings.join([ex['output']], separator=' ')
-        print('inputs----------', str(inputs))
-        print('class labels----------', str(class_label))
+        print('inputs----------', [ ex['input']])
+        print('class labels----------', [ex['output']])
         print('----------finsihed preprocessing-----------')
         return {'inputs': inputs, 'targets': class_label }        
   return ds.map(to_inputs_and_targets, num_parallel_calls=tf.data.experimental.AUTOTUNE)
