@@ -1,4 +1,5 @@
 import functools
+from operator import le
 import os
 import time
 import warnings
@@ -43,15 +44,15 @@ def nq_dataset_fn(split, shuffle_files=True):
       num_parallel_calls=tf.data.experimental.AUTOTUNE)
   ds = ds.map(lambda *ex: dict(zip(["input", "output"], ex)))
   print('----------finsihed nq_dataset_fn-----------')
-  print('DS---------------:', str(ds))
+  print('DS---------------:', len(ds))
   return ds
 
 def preprocessing(ds):
   def to_inputs_and_targets(ex):
         inputs = tf.strings.join([ ex['input']], separator=' ')
         class_label = tf.strings.join([ex['output']], separator=' ')
-        print('inputs----------', [ ex['input']])
-        print('class labels----------', [ex['output']])
+        print('inputs----------', len(inputs))
+        print('class labels----------', len(class_label))
         print('----------finsihed preprocessing-----------')
         return {'inputs': inputs, 'targets': class_label }        
   return ds.map(to_inputs_and_targets, num_parallel_calls=tf.data.experimental.AUTOTUNE)
