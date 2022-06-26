@@ -43,14 +43,17 @@ def nq_dataset_fn(split, shuffle_files=True):
       num_parallel_calls=tf.data.experimental.AUTOTUNE)
   ds = ds.map(lambda *ex: dict(zip(["input", "output"], ex)))
   print('----------finsihed nq_dataset_fn-----------')
+  print('DS---------------:', ds)
   return ds
 
 def preprocessing(ds):
   def to_inputs_and_targets(ex):
         inputs = tf.strings.join([ ex['input']], separator=' ')
         class_label = tf.strings.join([ex['output']], separator=' ')
-        return {'inputs': inputs, 'targets': class_label }
+        print('inputs----------', inputs)
+        print('class labels----------', class_label)
         print('----------finsihed preprocessing-----------')
+        return {'inputs': inputs, 'targets': class_label }        
   return ds.map(to_inputs_and_targets, num_parallel_calls=tf.data.experimental.AUTOTUNE)
 
 
