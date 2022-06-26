@@ -44,16 +44,12 @@ def nq_dataset_fn(split, shuffle_files=True):
       num_parallel_calls=tf.data.experimental.AUTOTUNE)
   ds = ds.map(lambda *ex: dict(zip(["input", "output"], ex)))
   print('----------finsihed nq_dataset_fn-----------')
-  print('DS---------------:', len(ds))
   return ds
 
 def preprocessing(ds):
   def to_inputs_and_targets(ex):
         inputs = tf.strings.join([ ex['input']], separator=' ')
         class_label = tf.strings.join([ex['output']], separator=' ')
-        print('inputs----------', len(inputs))
-        print('class labels----------', len(class_label))
-        print('----------finsihed preprocessing-----------')
         return {'inputs': inputs, 'targets': class_label }        
   return ds.map(to_inputs_and_targets, num_parallel_calls=tf.data.experimental.AUTOTUNE)
 
@@ -89,12 +85,12 @@ nq_task = t5.data.TaskRegistry.get("pretraining")
 ds = nq_task.get_dataset(split="train", sequence_length={"inputs": 512, "targets": 512})
 print("A  preprocessed training example...")
 
-for ex in tfds.as_numpy(ds.take(1)):
+for ex in tfds.as_numpy(ds.take(5)):
   print(ex)
 
 MODEL_SIZE = "small"  
 
-MODEL_DIR = "data/automating_code_review/automating_code_review/model_dumps/pre-training/"
+MODEL_DIR = "data/automating_code_review/automating_code_review/model_dumps/pre-training/new_checkpoints/"
 
 model_parallelism, train_batch_size, keep_checkpoint_max = {
     "small": (1, 256, 16),
@@ -115,7 +111,7 @@ model = t5.models.MtfModel(
     sequence_length={"inputs": 512, "targets": 512},
     learning_rate_schedule = learning_rate_schedule_noam,
     save_checkpoints_steps=10000,
-    keep_checkpoint_max=keep_checkpoint_max
+    keep_checkpoint_max=None
 )
 
 # We used 200000 TRAIN_STEPS
