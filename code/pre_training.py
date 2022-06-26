@@ -85,12 +85,12 @@ nq_task = t5.data.TaskRegistry.get("pretraining")
 ds = nq_task.get_dataset(split="train", sequence_length={"inputs": 512, "targets": 512})
 print("A  preprocessed training example...")
 
-for ex in tfds.as_numpy(ds.take(5)):
+for ex in tfds.as_numpy(ds.take(1)):
   print(ex)
 
 MODEL_SIZE = "small"  
 
-MODEL_DIR = "data/automating_code_review/automating_code_review/model_dumps/pre-training/new_checkpoints/"
+MODEL_DIR = "data/automating_code_review/automating_code_review/model_dumps/pre-training/new_checkpoints/two/"
 
 model_parallelism, train_batch_size, keep_checkpoint_max = {
     "small": (1, 256, 16),
