@@ -90,7 +90,7 @@ for ex in tfds.as_numpy(ds.take(1)):
 
 MODEL_SIZE = "small"  
 
-MODEL_DIR = "data/automating_code_review/automating_code_review/model_dumps/pre-training/new_checkpoints/three/"
+MODEL_DIR = "data/automating_code_review/automating_code_review/model_dumps/pre-training/new_checkpoints/one/"
 
 model_parallelism, train_batch_size, keep_checkpoint_max = {
     "small": (1, 256, 16),
@@ -108,7 +108,7 @@ model = t5.models.MtfModel(
     tpu=None,
     tpu_topology=None,
     model_parallelism=model_parallelism,
-    batch_size=128,
+    batch_size=32,
     sequence_length={"inputs": 512, "targets": 512},
     learning_rate_schedule = learning_rate_schedule_noam,
     save_checkpoints_steps=10000,
