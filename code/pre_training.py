@@ -100,6 +100,7 @@ model_parallelism, train_batch_size, keep_checkpoint_max = {
     "11B": (8, 16, 1)}[MODEL_SIZE]
 
 tf.io.gfile.makedirs(MODEL_DIR)
+print('--------train_batch_size----------:', train_batch_size)
 
 print('--------model initialization--------------')
 model = t5.models.MtfModel(
