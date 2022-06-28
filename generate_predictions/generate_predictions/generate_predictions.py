@@ -83,6 +83,8 @@ for batch in tqdm(dloader):
         early_stopping=True,
         num_return_sequences=beam_size).to(DEVICE)
     
+
+    print(outputs)
     
 
     predictions.extend(t5_tokenizer.batch_decode(outputs, skip_special_tokens=True))
@@ -100,6 +102,8 @@ for batch in tqdm(dloader):
 
     old = new
     new = new + (batch_size * beam_size)
+
+    break
 
 
 f_pred.close()
