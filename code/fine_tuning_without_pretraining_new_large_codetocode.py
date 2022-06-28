@@ -19,12 +19,12 @@ from tensorflow.keras.optimizers.schedules import PolynomialDecay
 
 ## tasks large dataset
 nq_tsv_path_code_code_large = {
-    "train":      'data/automating_code_review/automating_code_review/automating_code_review/dataset/fine-tuning/new_large/code-to-code/train.tsv',
-    "validation": 'data/automating_code_review/automating_code_review/automating_code_review/dataset/fine-tuning/new_large/code-to-code/val.tsv'
+    "train":      'data/automating_code_review/automating_code_review/dataset/fine-tuning/new_large/code-to-code/train.tsv',
+    "validation": 'data/automating_code_review/automating_code_review/dataset/fine-tuning/new_large/code-to-code/val.tsv'
 }
 
-data_train = len([line for line in open('data/automating_code_review/automating_code_review/automating_code_review/dataset/fine-tuning/new_large/code-to-code/train.tsv', 'r')])
-data_val = len([line for line in open('data/automating_code_review/automating_code_review/automating_code_review/dataset/fine-tuning/new_large/code-to-code/val.tsv', 'r')])
+data_train = len([line for line in open('data/automating_code_review/automating_code_review/dataset/fine-tuning/new_large/code-to-code/train.tsv', 'r')])
+data_val = len([line for line in open('data/automating_code_review/automating_code_review/dataset/fine-tuning/new_large/code-to-code/val.tsv', 'r')])
 
 num_nq_examples_code_code_large = dict(train=data_train, validation=data_val)
 
