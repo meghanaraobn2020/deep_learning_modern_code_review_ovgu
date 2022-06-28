@@ -128,7 +128,7 @@ selected_learning_rate_scheduler = 0.001
 PATH_GIN_FILE = 'data/automating_code_review/automating_code_review/utils/operative_config_constant.gin'
 
 #@title Select a learning rate scheduler
-number_of_steps = 500 #@param {type:"integer"}
+number_of_steps = 100000 #@param {type:"integer"}
 
 tf.io.gfile.makedirs(MODEL_DIR)
 
@@ -151,12 +151,4 @@ with gin.unlock_config():
     TRAIN_STEPS = number_of_steps
     model.train("code_to_code_new_large", steps=number_of_steps)
 
-model.batch_size = 1024
-model.eval(
-    mixture_or_task_name="code_to_code_new_large",
-    # -1 will evaluate the last checkpoint, you can also provide 
-    # a list of checkpoints with the following format : [10000, 20000, 30000]
-    checkpoint_steps=-1,
-    split="validation"
-    )
 
