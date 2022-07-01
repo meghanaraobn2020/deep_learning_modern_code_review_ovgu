@@ -90,7 +90,7 @@ for ex in tfds.as_numpy(ds.take(1)):
 
 MODEL_SIZE = "small"  
 
-MODEL_DIR = "data/automating_code_review/automating_code_review/model_dumps/pre-training/new_checkpoints/one/"
+MODEL_DIR = "data/automating_code_review/automating_code_review/model_dumps/pre-training/new_checkpoints/two/"
 
 model_parallelism, train_batch_size, keep_checkpoint_max = {
     "small": (1, 256, 16),
