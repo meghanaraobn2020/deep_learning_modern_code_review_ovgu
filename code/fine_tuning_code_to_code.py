@@ -161,7 +161,7 @@ model = t5.models.MtfModel(
 
 # NON PRETRAINED
 with gin.unlock_config():    
-    gin.parse_config_file("./config.gin")
+    gin.parse_config_file("data/automating_code_review/automating_code_review/utils/operative_config_constant.gin")
     TRAIN_STEPS = number_of_steps
     model.train('code_to_code_new_large', steps=number_of_steps)
 
