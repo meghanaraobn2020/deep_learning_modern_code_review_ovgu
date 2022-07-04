@@ -114,7 +114,7 @@ MODEL_SIZE = "small"
 fine_tuning = "fine-tuning_without_pre-training/"
 dataset = "new_large"
 
-MODEL_DIR = 'data/automating_code_review/automating_code_review/model_dumps/fine-tuning_without_pre-training/new_large_dataset/code-to-code/'
+MODEL_DIR = 'data/automating_code_review/automating_code_review/model_dumps/fine-tuning_without_pre-training/new_large_dataset/code-to-code/new'
 
 model_parallelism, train_batch_size, keep_checkpoint_max = {
     "small": (1, 128, 200),
