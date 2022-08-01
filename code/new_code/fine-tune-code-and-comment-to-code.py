@@ -39,19 +39,19 @@ print("current_time:", current_time)
 
 
 # Directory Paths
-root_path = "/workspace/itsec/itsec1/test/ssh_temp/"
+root_path = "/mnt/nas/meghana/dlmcr/data/"
 task_name1 = "code&comment-to-code"
 task_name2 = "code&comment2code: "
 task_name3 = "code_comment_to_code_new_large"
 task_name4 = "code_and_comment2code"
 
-train_path = root_path + "automating_code_review/dataset/fine-tuning/new_large/" + task_name1 + "/train.tsv"
-val_path = root_path + "automating_code_review/dataset/fine-tuning/new_large/" + task_name1 + "/val.tsv"
+train_path = root_path + "automating_code_review/automating_code_review/dataset/fine-tuning/new_large/" + task_name1 + "/train.tsv"
+val_path = root_path + "automating_code_review/automating_code_review/dataset/fine-tuning/new_large/" + task_name1 + "/val.tsv"
 
 
 #Model vocab and path
-vocab_model_path = root_path + "automating_code_review/tokenizer/TokenizerModel.model"
-vocab_path = root_path + "automating_code_review/tokenizer/TokenizerModel.vocab"
+vocab_model_path = root_path + "automating_code_review/automating_code_review/tokenizer/TokenizerModel.model"
+vocab_path = root_path + "automating_code_review/automating_code_review/tokenizer/TokenizerModel.vocab"
 
 # Model cehckpoint path
 MODEL_DIR = root_path + "model_checkpoints/" + task_name4 + "/check_" + current_time
@@ -59,7 +59,7 @@ if not os.path.exists(MODEL_DIR):
     os.makedirs(MODEL_DIR)
 
 # Gin config path
-GIN_PATH = root_path + 'automating_code_review/utils/operative_config_constant.gin'
+GIN_PATH = root_path + 'automating_code_review/automating_code_review/utils/operative_config_slanted.gin'
 
 
 # Read the data
@@ -162,7 +162,7 @@ model_parallelism, train_batch_size, keep_checkpoint_max = {
 # Parameters
 # Learning rate scheduler
 
-learning_rate_scheduler_picker = "constant"
+learning_rate_scheduler_picker = "slanted"
 
 if learning_rate_scheduler_picker == "slanted":
   selected_learning_rate_scheduler = slanted_triangular

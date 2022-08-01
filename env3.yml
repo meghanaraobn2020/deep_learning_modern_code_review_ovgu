@@ -1,9 +1,0 @@
-name: dlmcr4
-channels:
-  - defaults
-dependencies:
-  - pip
-  - python=3.9
-  - cudatoolkit
-  - cudnn
-prefix: /mnt/nas/meghana/miniconda/envs/dlmcr4
