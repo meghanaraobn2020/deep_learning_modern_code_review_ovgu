@@ -175,7 +175,7 @@ elif learning_rate_scheduler_picker == "constant":
 
 
 # Training
-batch_size = 8
+batch_size = 4
 
 dataset_size = 134238 # code2comment
 epochs = 6
