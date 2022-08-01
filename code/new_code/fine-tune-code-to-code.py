@@ -59,7 +59,7 @@ if not os.path.exists(MODEL_DIR):
     os.makedirs(MODEL_DIR)
 
 # Gin config path
-GIN_PATH = root_path + 'automating_code_review/automating_code_review/utils/operative_config_slanted.gin'
+GIN_PATH = '/mnt/nas/meghana/dlmcr/deep_learning_modern_code_review_ovgu/code/utils/operative_config_slanted.gin'
 
 
 # Read the data
