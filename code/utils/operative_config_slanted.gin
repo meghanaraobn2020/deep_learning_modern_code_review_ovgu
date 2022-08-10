@@ -192,7 +192,7 @@ SimdMeshImpl.allreduce_in_bfloat16_max_group_size = 8
 # Parameters for slanted_triangular:
 # ==============================================================================
 slanted_triangular.cut_fraction = 0.1
-slanted_triangular.max_learning_rate = 0.0001
+slanted_triangular.max_learning_rate = 0.000001
 slanted_triangular.ratio = 32
 slanted_triangular.start_step = 200000
 slanted_triangular.total_train_steps = 400000
