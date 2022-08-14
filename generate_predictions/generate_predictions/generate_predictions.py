@@ -47,7 +47,7 @@ batch_size = 64
 task = 'code2code: '  # possible options: 'code2code: ', 'code&comment2code: ', 'code2comment: '
 data_dir = "data/dataset/dataset/fine-tuning/new_large/code-to-code/"  # change the path if needed- ../../dataset/fine-tuning/large/code-to-code/"
 tokenizer_name = "deep_learning_modern_code_review_ovgu/tokenizer/tokenizer/TokenizerModel.model" #"../../tokenizer/TokenizerModel.model" 
-model_name_or_path ="deep_learning_modern_code_review_ovgu/dumps/pytorch_model.bin" #"./dumps/pytorch_model.bin" 
+model_name_or_path ="deep_learning_modern_code_review_ovgu/dumps/code2code/pytorch_model.bin" #"./dumps/pytorch_model.bin" 
 config_name = "deep_learning_modern_code_review_ovgu/generate_predictions/generate_predictions/config.json" #"./config.json" 
 
 dataset = EvalDataset(data_dir, task)
