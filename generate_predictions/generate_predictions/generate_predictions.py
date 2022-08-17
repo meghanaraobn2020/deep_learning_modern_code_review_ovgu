@@ -43,7 +43,7 @@ class EvalDataset(torch.utils.data.Dataset):
 
 
 beam_size = 10
-batch_size = 64
+batch_size = 8
 task = 'code2code: '  # possible options: 'code2code: ', 'code&comment2code: ', 'code2comment: '
 data_dir = "data/dataset/dataset/fine-tuning/new_large/code-to-code/"  # change the path if needed- ../../dataset/fine-tuning/large/code-to-code/"
 tokenizer_name = "deep_learning_modern_code_review_ovgu/tokenizer/tokenizer/TokenizerModel.model" #"../../tokenizer/TokenizerModel.model" 
