@@ -42,7 +42,7 @@ class EvalDataset(torch.utils.data.Dataset):
         return len(self.samples)
 
 
-beam_size = 10
+beam_size = 5
 batch_size = 64
 task = 'code2code: '  # possible options: 'code2code: ', 'code&comment2code: ', 'code2comment: '
 data_dir = "data/dataset/dataset/fine-tuning/new_large/code-to-code/"  # change the path if needed- ../../dataset/fine-tuning/large/code-to-code/"
