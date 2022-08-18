@@ -59,7 +59,7 @@ if not os.path.exists(MODEL_DIR):
     os.makedirs(MODEL_DIR)
 
 # Gin config path
-GIN_PATH = '/mnt/nas/meghana/dlmcr/deep_learning_modern_code_review_ovgu/code/utils/operative_config_slanted.gin'
+GIN_PATH = '/mnt/nas/meghana/dlmcr/deep_learning_modern_code_review_ovgu/code/utils/operative_config_isr.gin'
 
 
 # Read the data
@@ -162,7 +162,7 @@ model_parallelism, train_batch_size, keep_checkpoint_max = {
 # Parameters
 # Learning rate scheduler
 
-learning_rate_scheduler_picker = "slanted"
+learning_rate_scheduler_picker = "isr"
 
 if learning_rate_scheduler_picker == "slanted":
   selected_learning_rate_scheduler = slanted_triangular
