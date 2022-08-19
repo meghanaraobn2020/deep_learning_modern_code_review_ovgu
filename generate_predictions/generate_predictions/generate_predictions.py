@@ -61,7 +61,7 @@ t5_config = T5Config.from_pretrained(config_name)
 t5_mlm = T5ForConditionalGeneration.from_pretrained(model_name_or_path, config=t5_config).to(DEVICE)
 
 # GENERATE PREDICTIONS
-f_pred = open(data_dir + 'predictions/predictions_' + str(beam_size) + '.txt', 'w+')
+f_pred = open(data_dir + 'predictions/isr_learning_rate/predictions_' + str(beam_size) + '.txt', 'w+')
 predictions = []
 
 # indexes for batches
