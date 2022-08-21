@@ -54,12 +54,12 @@ vocab_model_path = root_path + "automating_code_review/automating_code_review/to
 vocab_path = root_path + "automating_code_review/automating_code_review/tokenizer/TokenizerModel.vocab"
 
 # Model cehckpoint path
-MODEL_DIR = root_path + "model_checkpoints/" + task_name4 + "/check_" + current_time
+MODEL_DIR = root_path + "model_checkpoints/" + task_name4 + "/isr_learning_rate/check_" + current_time
 if not os.path.exists(MODEL_DIR):
     os.makedirs(MODEL_DIR)
 
 # Gin config path
-GIN_PATH = root_path + 'automating_code_review/automating_code_review/utils/operative_config_slanted.gin'
+GIN_PATH = '/mnt/nas/meghana/dlmcr/deep_learning_modern_code_review_ovgu/code/utils/operative_config_isr.gin'
 
 
 # Read the data
@@ -162,7 +162,7 @@ model_parallelism, train_batch_size, keep_checkpoint_max = {
 # Parameters
 # Learning rate scheduler
 
-learning_rate_scheduler_picker = "slanted"
+learning_rate_scheduler_picker = "isr"
 
 if learning_rate_scheduler_picker == "slanted":
   selected_learning_rate_scheduler = slanted_triangular
