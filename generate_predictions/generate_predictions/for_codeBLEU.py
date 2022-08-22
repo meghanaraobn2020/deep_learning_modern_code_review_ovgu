@@ -118,8 +118,6 @@ for BEAM_SIZE in [10]:
             if current_BLEU > best_BLEU:
                 best_BLEU = current_BLEU
         BLEUscore.append(best_BLEU)
-        if i == 50:
-            break
 
     print(f'PP    : %d/%d (%s%.2f)' % (count_perfect, len(tgt), '%', (count_perfect * 100) / len(tgt)))
     print(f'BLEU mean              : ', statistics.mean(BLEUscore))
