@@ -5,6 +5,9 @@ import javalang
 import pandas as pd
 
 
+root_path = '/mnt/nas/meghana/dlmcr/'
+
+
 def tokenize_java(code):
     token_gen = javalang.tokenizer.tokenize(code)
     tokens = []
@@ -22,10 +25,10 @@ def tokenize_java(code):
 
 
 def code_bleu(ref, hyp):
-    f = open('ref.txt', 'w')
+    f = open(root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-code/predictions/isr_learning_rate/ref.txt', 'w')
     f.write(ref)
     f.close()
-    f = open('hyp.txt', 'w')
+    f = open(root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-code/predictions/isr_learning_rate/hyp.txt', 'w')
     f.write(hyp)
     f.close()
 
@@ -51,13 +54,15 @@ def code_bleu(ref, hyp):
         result = [line.strip() for line in open(path_result)]
         return float(result[-1].split()[2])
     try:
+        print(result)
         return float(result[-1].split()[2])
     except:
         print('.............................................WARNING.............................................')
         return 0
 
 
-for BEAM_SIZE in [1, 3, 5, 10]:
+# for BEAM_SIZE in [1, 3, 5, 10]:
+for BEAM_SIZE in [10]:
 
     print('BEAM SIZE: ', BEAM_SIZE)
 
@@ -66,21 +71,21 @@ for BEAM_SIZE in [1, 3, 5, 10]:
     # - path_predictions : predictions file
     # - path_statistics : the file where the statistics will be saved
 
-    path_targets = '../../dataset/fine-tuning/large/code-to-code/test.tsv'
-    path_predictions = '../../results/dataset_large/T5_pre-training/code-to-code/predictions_' + str(BEAM_SIZE) + '.txt'
-    path_statistics = '../../results/dataset_large/T5_pre-training/code-to-code/statistics_' + str(BEAM_SIZE) + '.txt'
+    path_targets = root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-code/test.tsv'
+    path_predictions = root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-code/predictions/isr_learning_rate/predictions_' + str(BEAM_SIZE) + '.txt'
+    path_statistics = root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-code/predictions/isr_learning_rate/statistics_' + str(BEAM_SIZE) + '.txt'
 
     df = pd.read_csv(path_targets, sep='\t', names=['source', 'target'])
 
     tgt = df['target']
     pred = [line.strip() for line in open(path_predictions)]
 
-    path_ref = '../../../../../ref.txt'
-    path_hyp = '../../../../../hyp.txt'
-
-    path_result = './CodeXGLUE/Code-Code/code-to-code-trans/evaluator/CodeBLEU/bleu.log'
+    path_ref = root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-code/predictions/isr_learning_rate/ref.txt'
+    path_hyp = root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-code/predictions/isr_learning_rate/hyp.txt'
+    path_result = root_path + 'deep_learning_modern_code_review_ovgu/generate_predictions/generate_predictions/CodeXGLUE/Code-Code/code-to-code-trans/evaluator/CodeBLEU/bleu.log'
 
     count_perfect = 0
+    # BLEUscore = [1,2,3,4]
     BLEUscore = []
 
     for i in tqdm(range(len(tgt))):
@@ -113,6 +118,8 @@ for BEAM_SIZE in [1, 3, 5, 10]:
             if current_BLEU > best_BLEU:
                 best_BLEU = current_BLEU
         BLEUscore.append(best_BLEU)
+        if i == 50:
+            break
 
     print(f'PP    : %d/%d (%s%.2f)' % (count_perfect, len(tgt), '%', (count_perfect * 100) / len(tgt)))
     print(f'BLEU mean              : ', statistics.mean(BLEUscore))
