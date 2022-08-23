@@ -25,10 +25,10 @@ def tokenize_java(code):
 
 
 def code_bleu(ref, hyp):
-    f = open(root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-code/predictions/isr_learning_rate/ref.txt', 'w')
+    f = open(root_path + 'data/dataset/dataset/fine-tuning/new_large/code_comment-to-code/predictions/isr_learning_rate/ref.txt', 'w')
     f.write(ref)
     f.close()
-    f = open(root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-code/predictions/isr_learning_rate/hyp.txt', 'w')
+    f = open(root_path + 'data/dataset/dataset/fine-tuning/new_large/code_comment-to-code/predictions/isr_learning_rate/hyp.txt', 'w')
     f.write(hyp)
     f.close()
 
@@ -71,17 +71,17 @@ for BEAM_SIZE in [10]:
     # - path_predictions : predictions file
     # - path_statistics : the file where the statistics will be saved
 
-    path_targets = root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-code/test.tsv'
-    path_predictions = root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-code/predictions/isr_learning_rate/predictions_' + str(BEAM_SIZE) + '.txt'
-    path_statistics = root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-code/predictions/isr_learning_rate/statistics_' + str(BEAM_SIZE) + '.txt'
+    path_targets = root_path + 'data/dataset/dataset/fine-tuning/new_large/code_comment-to-code/test.tsv'
+    path_predictions = root_path + 'data/dataset/dataset/fine-tuning/new_large/code_comment-to-code/predictions/isr_learning_rate/predictions_' + str(BEAM_SIZE) + '.txt'
+    path_statistics = root_path + 'data/dataset/dataset/fine-tuning/new_large/code_comment-to-code/predictions/isr_learning_rate/statistics_' + str(BEAM_SIZE) + '.txt'
 
     df = pd.read_csv(path_targets, sep='\t', names=['source', 'target'])
 
     tgt = df['target']
     pred = [line.strip() for line in open(path_predictions)]
 
-    path_ref = root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-code/predictions/isr_learning_rate/ref.txt'
-    path_hyp = root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-code/predictions/isr_learning_rate/hyp.txt'
+    path_ref = root_path + 'data/dataset/dataset/fine-tuning/new_large/code_comment-to-code/predictions/isr_learning_rate/ref.txt'
+    path_hyp = root_path + 'data/dataset/dataset/fine-tuning/new_large/code_comment-to-code/predictions/isr_learning_rate/hyp.txt'
     path_result = root_path + 'deep_learning_modern_code_review_ovgu/generate_predictions/generate_predictions/CodeXGLUE/Code-Code/code-to-code-trans/evaluator/CodeBLEU/bleu.log'
 
     count_perfect = 0
