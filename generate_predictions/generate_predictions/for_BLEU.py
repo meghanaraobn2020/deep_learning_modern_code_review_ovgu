@@ -4,8 +4,9 @@ from tqdm import tqdm
 
 
 chencherry = bleu_score.SmoothingFunction()
+root_path = '/mnt/nas/meghana/dlmcr/'
 
-for BEAM_SIZE in [1, 3, 5, 10]:
+for BEAM_SIZE in [10]:
 
     print('BEAM SIZE: ', BEAM_SIZE)
 
@@ -14,9 +15,9 @@ for BEAM_SIZE in [1, 3, 5, 10]:
     # - path_predictions : predictions file
     # - path_statistics : the file where the statistics will be saved
 
-    path_targets = '../../dataset/fine-tuning/large/code-to-comment/test.tsv'
-    path_predictions = '../../dataset/fine-tuning/large/code-to-comment/predictions_' + str(BEAM_SIZE) + '.txt'
-    path_statistics = '../../dataset/fine-tuning/large/code-to-comment/statistics_' + str(BEAM_SIZE) + '.txt'
+    path_targets = root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-comment/test.tsv'
+    path_predictions = root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-comment/predictions/isr_learning_rate/predictions_' + str(BEAM_SIZE) + '.txt'
+    path_statistics =  root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-comment/predictions/isr_learning_rate/statistics_' + str(BEAM_SIZE) + '.txt'
 
     tgt = [line.strip() for line in open(path_targets)]
     pred = [line.strip() for line in open(path_predictions)]
