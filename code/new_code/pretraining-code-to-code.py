@@ -1,34 +1,19 @@
-# Import statements
 import functools
+from operator import le
 import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2' 
 import time
 import warnings
 
 import tensorflow.compat.v1 as tf
 import tensorflow_datasets as tfds
+import t5
+from contextlib import contextmanager
+import logging as py_logging
 from t5.data import postprocessors as t5_postprocessors
 from t5.seqio import Feature,SentencePieceVocabulary
-import t5
+from mesh_tensorflow.transformer.learning_rate_schedules import learning_rate_schedule_noam
 import gin
-import math
-from mesh_tensorflow.transformer.learning_rate_schedules import slanted_triangular 
-
-from mesh_tensorflow.transformer.learning_rate_schedules import truncated_rsqrt
- 
-from tensorflow.keras.optimizers.schedules import PolynomialDecay
 import datetime
-import argparse
-
-from transformers import T5Config, T5ForConditionalGeneration, load_tf_weights_in_t5
-from transformers.utils import logging
-
-from transformers import T5Tokenizer, T5Config, T5ForConditionalGeneration
-import torch
-from tqdm import tqdm
-import os
-from torch.utils.data import Dataset, DataLoader
-import pandas as pd
 
 masked_pretraining_dataset_path = "data/automating_code_review/automating_code_review/dataset/pre-training/pre-training.tsv"
 
