@@ -3,9 +3,7 @@ from operator import le
 import os
 import time
 import warnings
-warnings.filterwarnings("ignore", category=DeprecationWarning)
 import tensorflow.compat.v1 as tf
-tf.enable_eager_execution()
 import tensorflow_datasets as tfds
 import t5
 from contextlib import contextmanager
