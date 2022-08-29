@@ -14,9 +14,12 @@ from t5.data import postprocessors as t5_postprocessors
 from t5.seqio import Feature,SentencePieceVocabulary
 from mesh_tensorflow.transformer.learning_rate_schedules import learning_rate_schedule_noam
 import gin
+import datetime
 
 masked_pretraining_dataset_path = "data/automating_code_review/automating_code_review/dataset/pre-training/pre-training.tsv"
 
+current_time = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+print("current_time:", current_time)
 
 nq_tsv_path = {
     "train": masked_pretraining_dataset_path
@@ -89,8 +92,10 @@ for ex in tfds.as_numpy(ds.take(1)):
   print(ex)
 
 MODEL_SIZE = "small"  
+task_name = "pretraining_code2code"
+root_path = "/mnt/nas/meghana/dlmcr/data/"
 
-MODEL_DIR = "data/automating_code_review/automating_code_review/model_dumps/pre-training/new_checkpoints/two/"
+MODEL_DIR = root_path + "model_checkpoints/" + task_name + "/check_" + current_time
 
 model_parallelism, train_batch_size, keep_checkpoint_max = {
     "small": (1, 256, 16),
@@ -111,16 +116,16 @@ model = t5.models.MtfModel(
     batch_size=4,
     sequence_length={"inputs": 512, "targets": 512},
     learning_rate_schedule = learning_rate_schedule_noam,
-    save_checkpoints_steps=10000,
+    save_checkpoints_steps=5000,
     keep_checkpoint_max=None
 )
 
 # We used 200000 TRAIN_STEPS
-PATH_GIN_FILE = "data/automating_code_review/automating_code_review/model_dumps/pre-training/operative_config.gin"
+PATH_GIN_FILE = "/mnt/nas/meghana/dlmcr/deep_learning_modern_code_review_ovgu/code/utils/operative_config_isr.gin"
 
 with gin.unlock_config():  
     print('-----------train begins----------------')  
     gin.parse_config_file(PATH_GIN_FILE)
-    TRAIN_STEPS = 200000
+    TRAIN_STEPS = 201357
     model.train("pretraining", steps=TRAIN_STEPS)
     print('-----------train ends----------------')  
