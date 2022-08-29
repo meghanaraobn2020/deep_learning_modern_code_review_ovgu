@@ -120,7 +120,7 @@ model = t5.models.MtfModel(
 )
 
 # We used 200000 TRAIN_STEPS
-PATH_GIN_FILE = "/mnt/nas/meghana/dlmcr/deep_learning_modern_code_review_ovgu/code/utils/operative_config_isr.gin"
+PATH_GIN_FILE = "/mnt/nas/meghana/dlmcr/deep_learning_modern_code_review_ovgu/code/utils/operative_config.gin"
 
 with gin.unlock_config():  
     print('-----------train begins----------------')  
