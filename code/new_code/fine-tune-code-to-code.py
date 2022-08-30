@@ -44,8 +44,9 @@ task_name1 = "code-to-code"
 task_name2 = "code2code: "
 task_name3 = "code_to_code_new_large"
 task_name4 = "code2code"
+task_name5 = "pretraining_code2code"
 
-PRETRAINED_DIR = root_path + "model_checkpoints/" + task_name4 + "/check_2022-08-29_19-55-12"
+PRETRAINED_DIR = root_path + "model_checkpoints/" + task_name5 + "/check_2022-08-29_19-55-12"
 train_path = root_path + "automating_code_review/automating_code_review/dataset/fine-tuning/new_large/" + task_name1 + "/train.tsv"
 val_path = root_path + "automating_code_review/automating_code_review/dataset/fine-tuning/new_large/" + task_name1 + "/val.tsv"
 
