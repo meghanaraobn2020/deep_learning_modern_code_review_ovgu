@@ -210,7 +210,7 @@ model = t5.models.MtfModel(
 
 # PRETRAINED
 with gin.unlock_config():
-  gin.parse_config_file("./config.gin")
+  gin.parse_config_file(GIN_PATH)
   #RUN FINE-TUNING
   model.finetune(
     mixture_or_task_name=task_name3,
