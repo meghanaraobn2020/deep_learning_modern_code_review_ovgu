@@ -44,7 +44,7 @@ task_name1 = "code-to-comment"
 task_name2 = "code2comment: "
 task_name3 = "code_to_comment_new_large"
 task_name4 = "code2comment"
-task_name5 = "pretraining_codecomment2code"
+task_name5 = "pretraining_code2comment"
 task_pretraining = "pretraining"
 
 PRETRAINED_DIR = root_path + "model_checkpoints/" + task_pretraining + "/check_2022-08-29_19-55-12"

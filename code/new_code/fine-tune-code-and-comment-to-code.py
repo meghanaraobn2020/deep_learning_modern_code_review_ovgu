@@ -44,6 +44,10 @@ task_name1 = "code&comment-to-code"
 task_name2 = "code&comment2code: "
 task_name3 = "code_comment_to_code_new_large"
 task_name4 = "code_and_comment2code"
+task_name5 = "pretraining_codecomment2code"
+task_pretraining = "pretraining"
+
+PRETRAINED_DIR = root_path + "model_checkpoints/" + task_pretraining + "/check_2022-08-29_19-55-12"
 
 train_path = root_path + "automating_code_review/automating_code_review/dataset/fine-tuning/new_large/" + task_name1 + "/train.tsv"
 val_path = root_path + "automating_code_review/automating_code_review/dataset/fine-tuning/new_large/" + task_name1 + "/val.tsv"
@@ -54,7 +58,7 @@ vocab_model_path = root_path + "automating_code_review/automating_code_review/to
 vocab_path = root_path + "automating_code_review/automating_code_review/tokenizer/TokenizerModel.vocab"
 
 # Model cehckpoint path
-MODEL_DIR = root_path + "model_checkpoints/" + task_name4 + "/isr_learning_rate/check_" + current_time
+MODEL_DIR = root_path + "model_checkpoints/" + task_name5 + "/check_" + current_time
 if not os.path.exists(MODEL_DIR):
     os.makedirs(MODEL_DIR)
 
@@ -201,7 +205,17 @@ model = t5.models.MtfModel(
 
 
 # Start training
-with gin.unlock_config():    
-    gin.parse_config_file(GIN_PATH)
-    TRAIN_STEPS = number_of_steps
-    model.train(task_name3, steps=number_of_steps)
+# with gin.unlock_config():    
+#     gin.parse_config_file(GIN_PATH)
+#     TRAIN_STEPS = number_of_steps
+#     model.train(task_name3, steps=number_of_steps)
+
+# PRETRAINED
+with gin.unlock_config():
+  gin.parse_config_file(GIN_PATH)
+  #RUN FINE-TUNING
+  model.finetune(
+    mixture_or_task_name=task_name3,
+    pretrained_model_dir=PRETRAINED_DIR,
+    finetune_steps=75000
+  )
