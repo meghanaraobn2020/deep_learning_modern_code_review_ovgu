@@ -57,7 +57,7 @@ vocab_model_path = root_path + "automating_code_review/automating_code_review/to
 vocab_path = root_path + "automating_code_review/automating_code_review/tokenizer/TokenizerModel.vocab"
 
 # Model cehckpoint path
-MODEL_DIR = root_path + "model_checkpoints/" + task_name5 + "/code_comment2code/check_" + current_time
+MODEL_DIR = root_path + "model_checkpoints/" + task_name5 + "/check_" + current_time
 if not os.path.exists(MODEL_DIR):
     os.makedirs(MODEL_DIR)
 
