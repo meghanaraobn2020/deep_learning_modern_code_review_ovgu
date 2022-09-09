@@ -217,5 +217,5 @@ with gin.unlock_config():
   model.finetune(
     mixture_or_task_name=task_name3,
     pretrained_model_dir=PRETRAINED_DIR,
-    finetune_steps=75000
-    )
+    finetune_steps=200000
+  )
