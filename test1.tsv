@@ -1,0 +1,1 @@
+public void setSize(int size) {} public void setAggBuilder(AggregatorFactories.Builder aggBuilder) { for (AggregationBuilder aggregation : aggBuilder.getAggregatorFactories()) { public void setSize(int size) {} public void setAggBuilder(AggregatorFactories.Builder aggBuilder) { for (AggregationBuilder aggregation : aggBuilder.getAggregatorFactories()) {
