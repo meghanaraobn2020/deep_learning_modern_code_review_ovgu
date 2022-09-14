@@ -13,7 +13,7 @@ class EvalDataset(torch.utils.data.Dataset):
 
         self.samples = []
 
-        df = pd.read_csv('deep_learning_modern_code_review_ovgu/test_dataset/final_data_cb_10000.tsv', sep='\t', names=['source', 'target'])
+        df = pd.read_csv('deep_learning_modern_code_review_ovgu/test_dataset/final_data_cb_1000_test.tsv', sep='\t', names=['source', 'target'])
         source = df['source']
         target = df['target']
 
@@ -43,7 +43,7 @@ class EvalDataset(torch.utils.data.Dataset):
 
 
 beam_size = 10
-batch_size = 1
+batch_size = 2
 task = 'code2comment: '  # possible options: 'code2code: ', 'code&comment2code: ', 'code2comment: '
 data_dir = "data/dataset/dataset/fine-tuning/new_large/code-to-comment/"  # change the path if needed- ../../dataset/fine-tuning/large/code-to-code/"
 tokenizer_name = "deep_learning_modern_code_review_ovgu/tokenizer/tokenizer/TokenizerModel.model" #"../../tokenizer/TokenizerModel.model" 
