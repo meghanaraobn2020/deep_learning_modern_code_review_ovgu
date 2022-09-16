@@ -44,10 +44,10 @@ class EvalDataset(torch.utils.data.Dataset):
 
 beam_size = 1
 batch_size = 8
-task = 'code2code: '  # possible options: 'code2code: ', 'code&comment2code: ', 'code2comment: '
-data_dir = "data/dataset/dataset/fine-tuning/new_large/code-to-code/"  # change the path if needed- ../../dataset/fine-tuning/large/code-to-code/"
+task = 'code2comment: '  # possible options: 'code2code: ', 'code&comment2code: ', 'code2comment: '
+data_dir = "data/dataset/dataset/fine-tuning/new_large/code-to-comment/"  # change the path if needed- ../../dataset/fine-tuning/large/code-to-code/"
 tokenizer_name = "deep_learning_modern_code_review_ovgu/tokenizer/tokenizer/TokenizerModel.model" #"../../tokenizer/TokenizerModel.model" 
-model_name_or_path ="deep_learning_modern_code_review_ovgu/dumps/pre_training_code2code/isr_learning_rate/pytorch_model.bin" #"./dumps/pytorch_model.bin" 
+model_name_or_path ="deep_learning_modern_code_review_ovgu/dumps/pre_training_code2comment/isr_learning_rate/pytorch_model.bin" #"./dumps/pytorch_model.bin" 
 config_name = "deep_learning_modern_code_review_ovgu/generate_predictions/generate_predictions/config.json" #"./config.json" 
 
 dataset = EvalDataset(data_dir, task)
@@ -61,7 +61,7 @@ t5_config = T5Config.from_pretrained(config_name)
 t5_mlm = T5ForConditionalGeneration.from_pretrained(model_name_or_path, config=t5_config).to(DEVICE)
 
 # GENERATE PREDICTIONS
-f_pred = open(data_dir + 'predictions/pre_training_code2code/isr_learning_rate/beam_size_1/predictions_' + str(beam_size) + '.txt', 'w+')
+f_pred = open(data_dir + 'predictions/pre_training_code2comment/isr_learning_rate/beam_size_1/predictions_' + str(beam_size) + '.txt', 'w+')
 predictions = []
 
 # indexes for batches
