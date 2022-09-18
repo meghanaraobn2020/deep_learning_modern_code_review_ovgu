@@ -25,12 +25,10 @@ def tokenize_java(code):
 
 
 def code_bleu(ref, hyp):
-    #f = open(root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-code/predictions/pre_training_code2code/isr_learning_rate/model_2/ref.txt', 'w')
-    f = open(root_path + 'deep_learning_modern_code_review_ovgu/ref.txt', 'w')
+    f = open(root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-code/predictions/isr_learning_rate/beam_size_1/ref.txt', 'w')
     f.write(ref)
     f.close()
-    #f = open(root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-code/predictions/pre_training_code2code/isr_learning_rate/model_2/hyp.txt', 'w')
-    f = open(root_path + 'deep_learning_modern_code_review_ovgu/hyp.txt', 'w')
+    f = open(root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-code/predictions/isr_learning_rate/beam_size_1/hyp.txt', 'w')
     f.write(hyp)
     f.close()
 
@@ -64,7 +62,7 @@ def code_bleu(ref, hyp):
 
 
 # for BEAM_SIZE in [1, 3, 5, 10]:
-for BEAM_SIZE in [10]:
+for BEAM_SIZE in [1]:
 
     print('BEAM SIZE: ', BEAM_SIZE)
 
@@ -73,17 +71,17 @@ for BEAM_SIZE in [10]:
     # - path_predictions : predictions file
     # - path_statistics : the file where the statistics will be saved
 
-    path_targets =  root_path + 'deep_learning_modern_code_review_ovgu/test1.tsv' #root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-code/test.tsv'
-    path_predictions = root_path + 'deep_learning_modern_code_review_ovgu/test2.txt' #root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-code/predictions/pre_training_code2code/isr_learning_rate/model_2/predictions_' + str(BEAM_SIZE) + '.txt'
-    path_statistics = root_path + 'deep_learning_modern_code_review_ovgu/statistics_' + str(BEAM_SIZE) + '.txt'
+    path_targets =  root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-code/test.tsv'
+    path_predictions = root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-code/predictions/isr_learning_rate/beam_size_1/predictions_' + str(BEAM_SIZE) + '.txt'
+    path_statistics = root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-code/predictions/isr_learning_rate/beam_size_1/statistics_' + str(BEAM_SIZE) + '.txt'
 
     df = pd.read_csv(path_targets, sep='\t', names=['source', 'target'])
 
     tgt = df['target']
     pred = [line.strip() for line in open(path_predictions)]
 
-    path_ref =  root_path + 'deep_learning_modern_code_review_ovgu/ref.txt' #root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-code/predictions/pre_training_code2code/isr_learning_rate/model_2/ref.txt'
-    path_hyp =  root_path + 'deep_learning_modern_code_review_ovgu/hyp.txt' #root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-code/predictions/pre_training_code2code/isr_learning_rate/model_2/hyp.txt'
+    path_ref =  root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-code/predictions/isr_learning_rate/beam_size_1/ref.txt'
+    path_hyp =  root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-code/predictions/isr_learning_rate/beam_size_1/hyp.txt'
     path_result = root_path + 'deep_learning_modern_code_review_ovgu/generate_predictions/generate_predictions/CodeXGLUE/Code-Code/code-to-code-trans/evaluator/CodeBLEU/bleu.log'
 
     count_perfect = 0
@@ -128,7 +126,7 @@ for BEAM_SIZE in [10]:
 
     f = open(path_statistics, 'w+')
     f.write(f'PP     : %d/%d (%s%.2f)' % (count_perfect, len(tgt), '%', (count_perfect * 100) / len(tgt)))
-    f.write('\nBLEU mean              : ' + str(statistics.mean(BLEUscore)))
-    f.write('\nBLEU median            : ' + str(statistics.median(BLEUscore)))
-    f.write('\nBLEU stdev             : ' + str(statistics.stdev(BLEUscore)))
+    f.write('\nCode BLEU mean              : ' + str(statistics.mean(BLEUscore)))
+    f.write('\nCode BLEU median            : ' + str(statistics.median(BLEUscore)))
+    f.write('\nCode BLEU stdev             : ' + str(statistics.stdev(BLEUscore)))
     f.close()
