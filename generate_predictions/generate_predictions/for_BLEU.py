@@ -6,7 +6,7 @@ from tqdm import tqdm
 chencherry = bleu_score.SmoothingFunction()
 root_path = '/mnt/nas/meghana/dlmcr/'
 
-for BEAM_SIZE in [10]:
+for BEAM_SIZE in [1]:
 
     print('BEAM SIZE: ', BEAM_SIZE)
 
