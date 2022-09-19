@@ -16,8 +16,8 @@ for BEAM_SIZE in [5]:
     # - path_statistics : the file where the statistics will be saved
 
     path_targets = root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-comment/test.tsv'
-    path_predictions = root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-comment/predictions/pre_training_code2comment/isr_learning_rate/beam_size_5/predictions_' + str(BEAM_SIZE) + '.txt'
-    path_statistics =  root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-comment/predictions/pre_training_code2comment/isr_learning_rate/beam_size_5/statistics_' + str(BEAM_SIZE) + '.txt'
+    path_predictions = root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-comment/predictions/isr_learning_rate/beam_size_5/predictions_' + str(BEAM_SIZE) + '.txt'
+    path_statistics =  root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-comment/predictions/isr_learning_rate/beam_size_5/statistics_' + str(BEAM_SIZE) + '.txt'
 
     tgt = [line.strip() for line in open(path_targets)]
     pred = [line.strip() for line in open(path_predictions)]
