@@ -39,6 +39,7 @@ print("current_time:", current_time)
 
 
 # Directory Paths
+root = "/mnt/nas/meghana/dlmcr/"
 root_path = "/mnt/nas/meghana/dlmcr/data/"
 task_name1 = "code-to-comment"
 task_name2 = "code2comment: "
@@ -47,10 +48,15 @@ task_name4 = "code2comment"
 task_name5 = "pretraining_code2comment"
 task_pretraining = "pretraining"
 
-PRETRAINED_DIR = root_path + "model_checkpoints/" + task_pretraining + "/check_2022-08-29_19-55-12"
+#PRETRAINED_DIR = root_path + "model_checkpoints/" + task_pretraining + "/check_2022-08-29_19-55-12"
 
-train_path = root_path + "automating_code_review/automating_code_review/dataset/fine-tuning/new_large/" + task_name1 + "/train.tsv"
-val_path = root_path + "automating_code_review/automating_code_review/dataset/fine-tuning/new_large/" + task_name1 + "/val.tsv"
+#train_path = root_path + "automating_code_review/automating_code_review/dataset/fine-tuning/new_large/" + task_name1 + "/train.tsv"
+#val_path = root_path + "automating_code_review/automating_code_review/dataset/fine-tuning/new_large/" + task_name1 + "/val.tsv"
+
+#code-to-comment
+PRETRAINED_DIR = root_path + "model_checkpoints/" + task_name5 + "/check_2022-09-03_19-49-35"
+train_path = root + "deep_learning_modern_code_review_ovgu/test_dataset/train_new.tsv"
+val_path = root + "deep_learning_modern_code_review_ovgu/test_dataset/val_new.tsv"
 
 
 #Model vocab and path
@@ -58,7 +64,7 @@ vocab_model_path = root_path + "automating_code_review/automating_code_review/to
 vocab_path = root_path + "automating_code_review/automating_code_review/tokenizer/TokenizerModel.vocab"
 
 # Model cehckpoint path
-MODEL_DIR = root_path + "model_checkpoints/" + task_name5 + "/check_" + current_time
+MODEL_DIR = root_path + "model_checkpoints/" + task_name5 + "/new_data/check_" + current_time
 if not os.path.exists(MODEL_DIR):
     os.makedirs(MODEL_DIR)
 
