@@ -44,7 +44,7 @@ class EvalDataset(torch.utils.data.Dataset):
 
 beam_size = 1
 batch_size = 8
-task = 'code&comment2code: '  # possible options: 'code2code: ', 'code&comment2code: ', 'code2comment: '
+task = 'code2comment: '  # possible options: 'code2code: ', 'code&comment2code: ', 'code2comment: '
 data_dir = "data/dataset/dataset/fine-tuning/new_large/code_comment-to-code/"  # change the path if needed- ../../dataset/fine-tuning/large/code-to-code/"
 tokenizer_name = "deep_learning_modern_code_review_ovgu/tokenizer/tokenizer/TokenizerModel.model" #"../../tokenizer/TokenizerModel.model" 
 model_name_or_path ="deep_learning_modern_code_review_ovgu/dumps/pretraining_codecomment2code/isr_learning_rate/pytorch_model.bin" #"./dumps/pytorch_model.bin" 
