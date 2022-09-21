@@ -13,7 +13,7 @@ class EvalDataset(torch.utils.data.Dataset):
 
         self.samples = []
 
-        df = pd.read_csv('/mnt/nas/meghana/dlmcr/deep_learning_modern_code_review_ovgu/test_dataset/test.tsv', sep='\t', names=['source', 'target'])
+        df = pd.read_csv('deep_learning_modern_code_review_ovgu/test_dataset/test.tsv', sep='\t', names=['source', 'target'])
         source = df['source']
         target = df['target']
 
