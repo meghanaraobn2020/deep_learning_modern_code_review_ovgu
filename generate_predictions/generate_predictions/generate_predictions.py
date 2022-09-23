@@ -42,7 +42,7 @@ class EvalDataset(torch.utils.data.Dataset):
         return len(self.samples)
 
 
-beam_size = 1
+beam_size = 5
 batch_size = 2
 task = 'code2comment: '  # possible options: 'code2code: ', 'code&comment2code: ', 'code2comment: '
 data_dir = "data/dataset/dataset/fine-tuning/new_large/code-to-comment/"  # change the path if needed- ../../dataset/fine-tuning/large/code-to-code/"
@@ -61,7 +61,7 @@ t5_config = T5Config.from_pretrained(config_name)
 t5_mlm = T5ForConditionalGeneration.from_pretrained(model_name_or_path, config=t5_config).to(DEVICE)
 
 # GENERATE PREDICTIONS
-f_pred = open(data_dir + 'predictions/pre_training_code2comment/isr_learning_rate/new_data/without_finetune/beam_size_1/predictions_' + str(beam_size) + '.txt', 'w+')
+f_pred = open(data_dir + 'predictions/pre_training_code2comment/isr_learning_rate/new_data/without_finetune/beam_size_5/predictions_' + str(beam_size) + '.txt', 'w+')
 predictions = []
 
 # indexes for batches
