@@ -6,7 +6,7 @@ from tqdm import tqdm
 chencherry = bleu_score.SmoothingFunction()
 root_path = '/mnt/nas/meghana/dlmcr/'
 
-for BEAM_SIZE in [10]:
+for BEAM_SIZE in [5]:
 
     print('BEAM SIZE: ', BEAM_SIZE)
 
@@ -16,8 +16,8 @@ for BEAM_SIZE in [10]:
     # - path_statistics : the file where the statistics will be saved
 
     path_targets = root_path + 'deep_learning_modern_code_review_ovgu/test_dataset/test_new.tsv'
-    path_predictions = root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-comment/predictions/pre_training_code2comment/isr_learning_rate/new_data/without_finetune/beam_size_10/predictions_' + str(BEAM_SIZE) + '.txt'
-    path_statistics =  root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-comment/predictions/pre_training_code2comment/isr_learning_rate/new_data/without_finetune/beam_size_10/statistics_' + str(BEAM_SIZE) + '.txt'
+    path_predictions = root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-comment/predictions/pre_training_code2comment/isr_learning_rate/new_data/without_finetune/beam_size_5/predictions_' + str(BEAM_SIZE) + '.txt'
+    path_statistics =  root_path + 'data/dataset/dataset/fine-tuning/new_large/code-to-comment/predictions/pre_training_code2comment/isr_learning_rate/new_data/without_finetune/beam_size_5/statistics_' + str(BEAM_SIZE) + '.txt'
 
     tgt = [line.strip() for line in open(path_targets)]
     pred = [line.strip() for line in open(path_predictions)]
